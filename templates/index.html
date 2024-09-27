@@ -1,7 +1,7 @@
 <html>
 <head>
     <style>
-        body { font-family: arial; margin: 20px; }
+        body { font-family: Arial, sans-serif; margin: 20px; }
         td { padding: 5px; }
         .bullish { background: green; color: white; }
         .bearish { background: red; color: white; }
@@ -10,41 +10,46 @@
 <body>
     <h1>Technical Scanner</h1>
     <form>
+        <label for="symbol">Select Stock Symbol:</label>
+        <select name="symbol" id="symbol" onchange="this.form.submit()">
+            <option value="">-- Select a Symbol --</option>
+            {% for stock in stocks %}
+                <option value="{{ stock }}" {% if symbol == stock %}selected="selected"{% endif %}>{{ stocks[stock]['company'] }}</option>
+            {% endfor %}
+        </select>
+
+        {% if symbol %}
+        <label for="pattern">Select a Pattern:</label>
         <select name="pattern">
             <option value="">-- Select a Pattern --</option>
             {% for key in candlestick_patterns %}
                 <option value="{{ key }}" {% if pattern == key %}selected="selected"{% endif %}>{{ candlestick_patterns[key] }}</option>
             {% endfor %}
         </select>
-
-        <input type="submit" value="Scan" />
+        <input type="submit" value="Analyze" />
+        {% endif %}
     </form>
 
+    {% if symbol %}
+    <h2>Stock Chart for {{ symbol }}</h2>
+    <img src="https://finviz.com/chart.ashx?t={{ symbol }}&ty=c&ta=1&p=d&s=l" />
+
+    {% if results and results|length > 0 %}
     <table>
         <tr>
-            <th>symbol</th>
-            <th>company</th>
-            <th>signal</th>
+            <th>Date</th>
+            <th>Signal</th>
         </tr>
-        {% for stock in stocks %}
-            {% if stocks[stock][pattern] %}
+        {% for date, result in results %}
             <tr>
-                <td>
-                    {{ stock }}
-                </td>
-                <td>
-                    {{ stocks[stock]['company'] }}
-                </td>
-                <td class="{{ stocks[stock][pattern] }}">
-                    {{ stocks[stock][pattern]}}
-                </td>
-            <tr>
-                <td colspan="3">
-                    <img src="https://finviz.com/chart.ashx?t={{ stock }}&ty=c&ta=1&p=d&s=l" />
-                </td>
+                <td>{{ date }}</td>
+                <td class="{% if result > 0 %}bullish{% elif result < 0 %}bearish{% endif %}">{{ result }}</td>
             </tr>
-            {% endif %}
         {% endfor %}
     </table>
+    {% else %}
+        <p>No valid pattern signals detected.</p>
+    {% endif %}
+    {% endif %}
 </body>
 </html>
