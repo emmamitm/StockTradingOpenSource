@@ -3,7 +3,9 @@ web-based technical screener for candlestick patterns using TA-Lib, Python, and 
 
 
 *clone the repository locally and run these commands 
-*
+* curl -O https://repo.anaconda.com/archive/Anaconda3-2023.03-MacOSX-x86_64.sh
+* bash Anaconda3-2023.03-MacOSX-x86_64.sh
+* restart terminal
 * conda env create -f environment.yml
 * conda activate finance_env
 * flask run
