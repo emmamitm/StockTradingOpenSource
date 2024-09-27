@@ -1,29 +1,46 @@
 import os, csv
 import talib
-import yfinance as yf
-import pandas
+import requests
+import pandas as pd
 from flask import Flask, request, render_template
 from patterns import candlestick_patterns
 
 app = Flask(__name__)
 
+API_KEY = '8C6QBAFM7FT6TXOI'
+
+def get_fresh_data(symbol, start_date, end_date):
+    url = f'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol={symbol}&apikey={API_KEY}&outputsize=full'
+    response = requests.get(url)
+    data = response.json()
+    
+    # Extract and format the data
+    time_series = data['Time Series (Daily)']
+    stock_data = []
+    for date, price_data in time_series.items():
+        if start_date <= date <= end_date:
+            stock_data.append([date, price_data['1. open'], price_data['2. high'], price_data['3. low'], price_data['4. close'], price_data['6. volume']])
+
+    # Convert to DataFrame
+    df = pd.DataFrame(stock_data, columns=['Date', 'Open', 'High', 'Low', 'Close', 'Volume'])
+    df.to_csv(f'datasets/daily/{symbol}.csv', index=False)
+    return df
+
 @app.route('/snapshot')
 def snapshot():
-    with open('datasets/symbols.csv') as f:
-        for line in f:
-            if "," not in line:
-                continue
-            symbol = line.split(",")[0]
-            data = yf.download(symbol, start="2020-01-01", end="2020-08-01")
-            data.to_csv('datasets/daily/{}.csv'.format(symbol))
+    symbol = request.args.get('symbol', None)
+    start_date = request.args.get('start', '2023-01-01')
+    end_date = request.args.get('end', '2023-09-01')
 
-    return {
-        "code": "success"
-    }
+    if symbol:
+        get_fresh_data(symbol, start_date, end_date)
+        return {"code": "success", "message": f"Data for {symbol} has been refreshed."}
+    
+    return {"code": "error", "message": "No symbol provided."}
 
 @app.route('/')
 def index():
-    pattern  = request.args.get('pattern', False)
+    pattern = request.args.get('pattern', False)
     stocks = {}
 
     with open('datasets/symbols.csv') as f:
@@ -32,7 +49,7 @@ def index():
 
     if pattern:
         for filename in os.listdir('datasets/daily'):
-            df = pandas.read_csv('datasets/daily/{}'.format(filename))
+            df = pd.read_csv(f'datasets/daily/{filename}')
             pattern_function = getattr(talib, pattern)
             symbol = filename.split('.')[0]
 
@@ -47,6 +64,9 @@ def index():
                 else:
                     stocks[symbol][pattern] = None
             except Exception as e:
-                print('failed on filename: ', filename)
+                print('Failed on filename: ', filename)
 
     return render_template('index.html', candlestick_patterns=candlestick_patterns, stocks=stocks, pattern=pattern)
+
+if __name__ == '__main__':
+    app.run(debug=True)
