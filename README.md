@@ -1,12 +1,9 @@
-# candlestick-screener
+# Open Source Project Stock Trading
 web-based technical screener for candlestick patterns using TA-Lib, Python, and Flask
 
-## Video Tutorials for this repository:
 
-* Candlestick Pattern Recognition - https://www.youtube.com/watch?v=QGkf2-caXmc
-* Building a Web-based Technical Screener - https://www.youtube.com/watch?v=OhvQN_yIgCo
-* Finding Breakouts - https://www.youtube.com/watch?v=exGuyBnhN_8
-
+*clone the repository locally and run these commands 
+*
 * conda env create -f environment.yml
-conda activate finance_env
-flask run
+* conda activate finance_env
+* flask run
