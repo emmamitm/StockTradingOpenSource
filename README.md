@@ -6,3 +6,7 @@ web-based technical screener for candlestick patterns using TA-Lib, Python, and 
 * Candlestick Pattern Recognition - https://www.youtube.com/watch?v=QGkf2-caXmc
 * Building a Web-based Technical Screener - https://www.youtube.com/watch?v=OhvQN_yIgCo
 * Finding Breakouts - https://www.youtube.com/watch?v=exGuyBnhN_8
+
+* conda env create -f environment.yml
+conda activate finance_env
+flask run
