@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: Stocks
+    env: python
+    runtime: python3.10  # Specify Python 3.10 here
+    buildCommand: |
+      python -m venv env &&
+      source env/bin/activate &&
+      pip install --upgrade pip &&
+      pip install -r requirements.txt
+    startCommand: |
+      source env/bin/activate &&
+      python app.py --host=0.0.0.0 --port=$PORT
