@@ -6,9 +6,9 @@ services:
   - type: web
     name: my-flask-app
     env: python
-    runtime: python3.10  # Specify the Python version you want
+    runtime: python3.7  # Specify the Python version you want
     buildCommand: |
-      python3.10 -m venv env &&
+      python3.7 -m venv env &&
       source env/bin/activate &&
       pip install --upgrade pip &&
       pip install -r requirements.txt
