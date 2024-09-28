@@ -1,6 +1,6 @@
-# Open Source Stock Screener
+# Open Source Stock Screener Made By Emma Mitchell
 
-<img width="1433" alt="Screenshot 2024-09-28 at 12 03 37 PM" src="https://github.com/user-attachments/assets/f38d0eaa-b239-4aa3-906d-d897e18a14c2">
+<img width="1428" alt="Screenshot 2024-09-28 at 12 06 16 PM" src="https://github.com/user-attachments/assets/8bb1604b-fb3f-48ce-b764-b4ccfa44da62">
 
 
 ## Overview
@@ -9,7 +9,7 @@ Welcome to the **Open Source Stock Screener**! 🚀
 
 I believe that **markets should be free and open**, and that everyone deserves access to the tools necessary for effective trading. This project is dedicated to empowering individuals with a user-friendly stock screening tool that provides valuable insights into market trends.
 
-![Trading Visualization](https://via.placeholder.com/600x300.png?text=Trading+Visualization)
+<img width="1433" alt="Screenshot 2024-09-28 at 12 03 37 PM" src="https://github.com/user-attachments/assets/f38d0eaa-b239-4aa3-906d-d897e18a14c2">
 
 ## Features
 
