@@ -1,6 +1,6 @@
 # Open Source Stock Screener Made By Emma Mitchell
 
-<img width="375" alt="Screenshot 2024-09-28 at 12 07 53 PM" src="https://github.com/user-attachments/assets/9894d456-1f24-470a-a683-83da09f98869">
+<img width="1428" alt="Screenshot 2024-09-28 at 12 07 53 PM" src="https://github.com/user-attachments/assets/9894d456-1f24-470a-a683-83da09f98869">
 
 
 ## Overview
@@ -107,9 +107,6 @@ You can run this project in three different ways: using **Anaconda**, **Python 3
    npm run setup
    npm run start
    ```
-
-![Financial Graph](https://via.placeholder.com/600x400.png?text=Financial+Graph)
-*Visualize your stock data effectively!*
 
 ## Conclusion
 
