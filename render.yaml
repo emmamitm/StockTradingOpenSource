@@ -1,7 +1,3 @@
-previews:
-  generation: automatic
-  expireAfterDays: 3
-
 services:
   - type: web
     name: my-flask-app
@@ -16,14 +12,3 @@ services:
     startCommand: |
       source env/bin/activate &&
       python app.py --host=0.0.0.0 --port=$PORT
-    envVars:
-      - key: MY_ENV_VAR
-        value: production-value  # Adjust as needed
-      - key: ANOTHER_ENV_VAR
-        value: another-value  # Adjust as needed
-
-databases:
-  - name: my_database
-    databaseName: my_db
-    user: my_user
-    plan: standard
