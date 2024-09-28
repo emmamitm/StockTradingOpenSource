@@ -1,6 +1,7 @@
 # Open Source Stock Screener
 
-![Stock Screener Banner](https://via.placeholder.com/1200x300.png?text=Open+Source+Stock+Screener)
+<img width="1433" alt="Screenshot 2024-09-28 at 12 03 37 PM" src="https://github.com/user-attachments/assets/f38d0eaa-b239-4aa3-906d-d897e18a14c2">
+
 
 ## Overview
 
